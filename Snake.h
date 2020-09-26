@@ -5,6 +5,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QKeyEvent>
 #include <QPainter>
+#include <QTime>
 
 #include <vector>
 #include <string>
@@ -25,21 +26,21 @@ private:
 
     void paintEvent(QPaintEvent*);
     void timerEvent(QTimerEvent*);
-    void leyPressEvent(QKeyEvent*);
+    void keyPressEvent(QKeyEvent*);
 
     static const int kWidth = 1080;
     static const int kHeight = 720;
     static const int kSizeDot = 10;
     static const int kAllDots = kWidth * kHeight;
-    static const int kRandPosition = 20;
+    static const int kRandPos = 20;
     static const int kDelay = 150;
 
    // QWidget* centralWidget;
 
-    QImage* dot;
-    QImage* head;
-    QImage* fruit;
-    const QString& imgPath = "C:\VisualStudio\Qt\Snake\img";
+    QImage dot;
+    QImage head;
+    QImage fruit;
+    //const QString& imgPath = "C:\VisualStudio\Qt\Snake\img";
 
     int timerId;
     int snakeDots;
@@ -65,6 +66,4 @@ private:
     void gameOver(QPainter&);
 
     //void paintObject();
-
-
 };
