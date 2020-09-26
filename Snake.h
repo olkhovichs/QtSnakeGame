@@ -23,6 +23,10 @@ public:
 private:
     Ui::SnakeClass ui;
 
+    void paintEvent(QPaintEvent*);
+    void timerEvent(QTimerEvent*);
+    void leyPressEvent(QKeyEvent*);
+
     static const int kWidth = 1080;
     static const int kHeight = 720;
     static const int kSizeDot = 10;
@@ -37,8 +41,8 @@ private:
     QImage* fruit;
     const QString& imgPath = "C:\VisualStudio\Qt\Snake\img";
 
-    int timerIs;
-    int dots;
+    int timerId;
+    int snakeDots;
     int fruitX;
     int fruitY;
 
