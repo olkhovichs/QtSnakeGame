@@ -26,6 +26,8 @@ void Snake::loadImage() {
 }
 
 void Snake::initGame() {
+    x.resize(kAllDots);
+    y.resize(kAllDots);
     snakeDots = 3;
     for (int i = 0; i < snakeDots; i++) {
         x[i] = 5 - i * 10;
