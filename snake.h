@@ -1,7 +1,9 @@
-#include <qwidget.h>
-#include <qmainwindow.h>
+﻿#include <QWidget>
+#include <QMainWindow>
 #include <QKeyEvent>
-#include <qlabel.h>
+#include <QLabel>
+#include <QHBoxLayout>
+#include <QVBoxLayout> 
 
 #include <string>
 
@@ -16,37 +18,16 @@ public:
 	explicit Snake(QWidget* parent = Q_NULLPTR);
 	~Snake();
 
-	static struct snakeNode {
-		QLabel* label;
-		int type;
-		int x, y;
-	};
-
 private:
 	static const int kWidthWindow = 1080;
 	static const int kHeightWindow = 720;
-	static const int kSizeBlock = 35;
 
-	bool leftDirection;
-	bool rightDirection;
-	bool upDirection;
-	bool downDirection;
+	QWidget* centralWidget;
+	QWidget* gameAref;
+	QLabel* gameStatus;
 
-	int level;
-	int score;
+	QHBoxLayout* mainBox;
 
-	QString* viewText;
+	void setMainWindow();
 
-	//void keyPressEvent(QKeyEvent* e);
-
-	void initGame();
-	void drawBorder();
-	void drawGameArea();
-	void showGameStatus();
-	void mainMenu();
-	void barMenu();
-	void moveSnake();
-	void checkCollision();
-	void createFruits();
-	void gameOver();
 };

@@ -1,17 +1,22 @@
-#include "snake.h"
+﻿#include "snake.h"
 
 Snake::Snake(QWidget* parent)
     : QMainWindow(parent) {
 
-    this->resize(kWidthWindow, kHeightWindow);
-    this->setWindowTitle("Snake");
-    this->setWindowIcon(QIcon("C:\\VisualStudio\\Qt\\Snake\\img\\titleIcon.png"));
-
-    initGame();
+    setMainWindow();
+    
 }
 
 Snake::~Snake() {}
 
-void Snake::initGame() {
+void Snake::setMainWindow() {
+    this->resize(kWidthWindow, kHeightWindow);
+    this->setWindowTitle("Snake");
+    this->setWindowIcon(QIcon("C:\\VisualStudio\\Qt\\Snake\\img\\titleIcon.png"));
+    this->setCentralWidget(centralWidget);
+    mainBox->setSpacing(5);
+    mainBox->addWidget(gameAref);
+    mainBox->addWidget(gameStatus);
 
+    this->centralWidget->setLayout(mainBox);
 }
