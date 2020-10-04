@@ -22,11 +22,11 @@ private:
 	static const int kWidthWindow = 1080;
 	static const int kHeightWindow = 720;
 
-	QWidget* centralWidget;
-	QWidget* gameAref;
-	QLabel* gameStatus;
+	QWidget* centralWidget = new QWidget;
+	QWidget* gameAref = new QWidget;
+	QWidget* gameStatus = new QWidget;
 
-	QHBoxLayout* mainBox;
+	QHBoxLayout* mainBox = new QHBoxLayout;
 
 	void setMainWindow();
 
