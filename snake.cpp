@@ -10,13 +10,7 @@ Snake::Snake(QWidget* parent)
 Snake::~Snake() {}
 
 void Snake::setMainWindow() {
-    this->resize(kWidthWindow, kHeightWindow);
+    this->resize(widthWindow, heightWindow);
     this->setWindowTitle("Snake");
     this->setWindowIcon(QIcon("C:\\VisualStudio\\Qt\\Snake\\img\\titleIcon.png"));
-    this->setCentralWidget(centralWidget);
-    mainBox->setSpacing(5);
-    mainBox->addWidget(gameAref);
-    mainBox->addWidget(gameStatus);
-
-    this->centralWidget->setLayout(mainBox);
 }
