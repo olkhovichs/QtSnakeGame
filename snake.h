@@ -2,8 +2,10 @@
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <QPaintEvent>
+#include <QList>
+#include <QTimer>
 
-#include <string>
+#include <ctime>
 
 namespace Ui {
 	class Snake;
@@ -19,7 +21,7 @@ public:
 	static const int widthWindow = 1080;
 	static const int heightWindow = 720;
 	static const int sizeBlock = 30;
-	static const int sizeBorder = 15;
+	static const int sizeBorder = 10;
 	static const int countRow = 15;
 	static const int gameTime = 1000;
 
@@ -43,10 +45,10 @@ public:
 private slots:
 	void growSnake();
 
-	QTimer* gameTimer;
+	QTimer* gameTimer = new QTimer;
 	bool isPause;
+	int gameScore = 0;
 	QPoint pointFruits;
 	QList<QPoint> snake;
 	Direction direction;
-	int score = 0;
 };
