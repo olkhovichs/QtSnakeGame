@@ -10,7 +10,7 @@ Snake::Snake(QWidget* parent)
 Snake::~Snake() {}
 
 void Snake::setMainWindow() {
-    this->resize(widthWindow, heightWindow);
+    this->resize(widthMainWindow, heightMainWindow);
     this->setWindowTitle("Snake");
     this->setWindowIcon(QIcon("C:\\VisualStudio\\Qt\\Snake\\img\\titleIcon.png"));
 }
@@ -29,6 +29,41 @@ void Snake::initGame() {
 }
 
 void Snake::spawnFruits() {
+    pointFruits.setX(rand() % countRow);
+    pointFruits.setY(rand() % countRow);
+    if (snake.contains(pointFruits)) {
+        spawnFruits();
+    }
+}
 
+void Snake::paintEvent(QPaintEvent* e) {
+    // main area
+    painter.setBrush(Qt::black); 
+    painter.setPen(Qt::blue);
+    painter.drawRect(sizeBorder, sizeBorder, widthGameArea, heightGameArea);
+
+    // snake
+    painter.setBrush(Qt::green);
+    painter.setPen(Qt::blue);
+    for (int i = 0; i < snake.size(); i++) {
+        painter.drawRect(sizeBorder + snake[i].x() * sizeBlock,
+            sizeBorder + snake[i].y() * sizeBlock,
+            sizeBlock,
+            sizeBlock);
+    }
+
+    // fruits
+    painter.setBrush(Qt::red);
+    painter.drawEllipse(sizeBorder + pointFruits.x() * sizeBlock, 
+        sizeBorder + pointFruits.y() * sizeBlock, 
+        sizeBlock, 
+        sizeBlock);
+
+    // status area
+    painter.setPen(Qt::black);
+    painter.setFont(QFont("Courier", 15));
+    painter.drawText(sizeBorder * 2 + widthGameArea + 20,
+        sizeBorder * 2 + heightGameArea + 20,
+        "Score" + QString::number(gameScore));
 }
 
