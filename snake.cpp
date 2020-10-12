@@ -93,5 +93,60 @@ void Snake::keyPressEvent(QKeyEvent* e) { // unfinished
     }
 }
 
+bool Snake::gameOver() {
+    int x = snake.front().x();
+    int y = snake.front().y();
+    if (x < 0 || x > countRow - 1 || y < 0 || y > countRow - 1) { // вне игрового поля
+        return true;
+    }
+    for (int i = 3; i < snake.size(); i++) {
+        if (snake[i] == snake.front()) {
+            return true;
+        }
+    }
+    return false;
+}
 
+void Snake::growSnake() {
+    switch (direction) {
+    case UP:
+        snake.push_front(QPoint(snake.front().x(), snake.front().y() - 1));
+        break;
+    case DOWN:
+        snake.push_front(QPoint(snake.front().x(), snake.front().y() + 1));
+        break;
+    case LEFT:
+        snake.push_front(QPoint(snake.front().x() - 1, snake.front().y()));
+        break;
+    case RIGHT:
+        snake.push_front(QPoint(snake.front().x() + 1, snake.front().y()));
+        break;
+    default:
+        break;
+    }
 
+    if (snake.contains(pointFruits)) {
+        gameScore++;
+        spawnFruits();
+    }
+    else {
+        snake.pop_back();
+    }
+    if (gameOver) {
+        gameTimer->stop();
+        QMessageBox::information(this, "Failed!", "Game over!");
+        return; // 
+    }
+    update();
+}
+
+void Snake::pauseGame() {
+    if (isPause) {
+        isPause = !isPause;
+        gameTimer->start();
+    }
+    else {
+        isPause = !isPause;
+        gameTimer->stop();
+    }
+}
