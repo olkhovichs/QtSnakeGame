@@ -4,7 +4,7 @@ Snake::Snake(QWidget* parent)
     : QMainWindow(parent) {
 
     setMainWindow();
-    initGame();
+    //initGame();
 }
 
 Snake::~Snake() {}
@@ -66,4 +66,32 @@ void Snake::paintEvent(QPaintEvent* e) {
         sizeBorder * 2 + heightGameArea + 20,
         "Score" + QString::number(gameScore));
 }
+
+void Snake::keyPressEvent(QKeyEvent* e) { // unfinished
+    switch (e->key()) {
+    case Qt::Key_W:
+        if (direction != DOWN) {
+            direction = UP;
+        }
+    case Qt::Key_S:
+        if (direction != UP) {
+            direction = DOWN;
+        }
+    case Qt::Key_D:
+        if (direction != LEFT) {
+            direction = RIGHT;
+        }
+    case Qt::Key_A:
+        if (direction != RIGHT) {
+            direction = LEFT;
+        }
+    case Qt::Key_Tab:
+       // pauseGame();
+        break;
+    default:
+        break;
+    }
+}
+
+
 

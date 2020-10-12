@@ -48,9 +48,10 @@ public:
 	void gameOver();
 	void spawnFruits();
 
-private slots:
-	void growSnake();
+/*private slots:
+	void growSnake();*/
 
+public:
 	QTimer* gameTimer = new QTimer;
 	bool isPause;
 	int gameScore = 0;
