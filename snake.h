@@ -30,7 +30,7 @@ public:
 	static const int sizeBlock = 30;
 	static const int sizeBorder = 10; // границы
 	static const int countRow = 15; // столбцы
-	static const int gameTime = 1000;
+	static const int gameTime = 500;
 
 	enum Direction {
 		UP,
@@ -57,7 +57,6 @@ public:
 	bool isPause;
 	int gameScore = 0;
 	QPoint pointFruits;
-	QPainter painter;
 	QList<QPoint> snake;
 	Direction direction;
 };

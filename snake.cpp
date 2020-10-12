@@ -4,7 +4,7 @@ Snake::Snake(QWidget* parent)
     : QMainWindow(parent) {
 
     setMainWindow();
-    //initGame();
+    initGame();
 }
 
 Snake::~Snake() {}
@@ -16,7 +16,7 @@ void Snake::setMainWindow() {
 }
 
 void Snake::initGame() {
-    for (int i = 4; i >= 0; i--) {
+    for (int i = 3; i >= 0; i--) {
         snake.push_back(QPoint(i, 0));
     }
     direction = LEFT;
@@ -38,6 +38,7 @@ void Snake::spawnFruits() {
 
 void Snake::paintEvent(QPaintEvent* e) {
     // main area
+    QPainter painter(this);
     painter.setBrush(Qt::black); 
     painter.setPen(Qt::blue);
     painter.drawRect(sizeBorder, sizeBorder, widthGameArea, heightGameArea);
@@ -132,7 +133,7 @@ void Snake::growSnake() {
     else {
         snake.pop_back();
     }
-    if (gameOver) {
+    if (gameOver()) {
         gameTimer->stop();
         QMessageBox::information(this, "Failed!", "Game over!");
         return; // 
