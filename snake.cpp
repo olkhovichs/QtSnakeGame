@@ -16,14 +16,15 @@ void Snake::setMainWindow() {
 }
 
 void Snake::initGame() {
-    for (int i = 3; i >= 0; i--) {
+    for (int i = 4; i >= 0; i--) {
         snake.push_back(QPoint(i, 0));
     }
-    direction = LEFT;
+    direction = RIGHT;
     std::srand(time(0));
     spawnFruits();
     gameScore = 0;
     isPause = false;
+    gameTimer = new QTimer;
     connect(gameTimer, SIGNAL(timeout()), this, SLOT(growSnake()));
     gameTimer->start(gameTime);
 }
@@ -70,24 +71,24 @@ void Snake::paintEvent(QPaintEvent* e) {
 
 void Snake::keyPressEvent(QKeyEvent* e) { // unfinished
     switch (e->key()) {
-    case Qt::Key_W:
+    case Qt::Key_Up:
         if (direction != DOWN) {
             direction = UP;
         }
-    case Qt::Key_S:
+    case Qt::Key_Down:
         if (direction != UP) {
             direction = DOWN;
         }
-    case Qt::Key_D:
+    case Qt::Key_Right:
         if (direction != LEFT) {
             direction = RIGHT;
         }
-    case Qt::Key_A:
+    case Qt::Key_Left:
         if (direction != RIGHT) {
             direction = LEFT;
         }
     case Qt::Key_Tab:
-       // pauseGame();
+        pauseGame();
         break;
     default:
         break;
@@ -138,7 +139,7 @@ void Snake::growSnake() {
         QMessageBox::information(this, "Failed!", "Game over!");
         return; // 
     }
-    update();
+    //update();
 }
 
 void Snake::pauseGame() {

@@ -27,9 +27,9 @@ public:
 	static const int heightGameArea = 650;
 	static const int widthStatusArea = 325;
 	static const int heightStatusArea = 650;
-	static const int sizeBlock = 30;
+	static const int sizeBlock = 26;
 	static const int sizeBorder = 10; // границы
-	static const int countRow = 15; // столбцы
+	static const int countRow = 25; // столбцы
 	static const int gameTime = 500;
 
 	enum Direction {
@@ -53,7 +53,7 @@ private slots:
 	void growSnake();
 
 public:
-	QTimer* gameTimer = new QTimer;
+	QTimer* gameTimer;
 	bool isPause;
 	int gameScore = 0;
 	QPoint pointFruits;
