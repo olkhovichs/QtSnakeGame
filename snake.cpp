@@ -38,8 +38,9 @@ void Snake::spawnFruits() {
 }
 
 void Snake::paintEvent(QPaintEvent* e) {
-    // main area
     QPainter painter(this);
+
+    // main area
     painter.setBrush(Qt::black); 
     painter.setPen(Qt::blue);
     painter.drawRect(sizeBorder, sizeBorder, widthGameArea, heightGameArea);
@@ -75,18 +76,22 @@ void Snake::keyPressEvent(QKeyEvent* e) { // unfinished
         if (direction != DOWN) {
             direction = UP;
         }
+        break;
     case Qt::Key_Down:
         if (direction != UP) {
             direction = DOWN;
         }
+        break;
     case Qt::Key_Right:
         if (direction != LEFT) {
             direction = RIGHT;
         }
+        break;
     case Qt::Key_Left:
         if (direction != RIGHT) {
             direction = LEFT;
         }
+        break;
     case Qt::Key_Tab:
         pauseGame();
         break;
@@ -139,7 +144,7 @@ void Snake::growSnake() {
         QMessageBox::information(this, "Failed!", "Game over!");
         return; // 
     }
-    //update();
+    update();
 }
 
 void Snake::pauseGame() {
