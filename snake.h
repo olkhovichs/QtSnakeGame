@@ -28,7 +28,7 @@ public:
 	static const int sizeBlock = 35;
 	static const int sizeBorder = 10; // границы
 	static const int countRow = 20; // столбцы
-	static const int gameTime = 500;
+	int gameTime = 500;
 
 	enum Direction {
 		UP,

@@ -41,13 +41,13 @@ void Snake::paintEvent(QPaintEvent* e) {
     QPainter painter(this);
 
     // main area
-    painter.setBrush(Qt::black); 
-    painter.setPen(Qt::blue);
+    painter.setBrush(color.green.lighter(150)); 
+    painter.setPen(color.black);
     painter.drawRect(sizeBorder, sizeBorder, widthGameArea, heightGameArea);
 
     // snake
-    painter.setBrush(Qt::green);
-    painter.setPen(Qt::blue);
+    painter.setBrush(color.green.darker(150));
+    painter.setPen(color.black);
     for (int i = 0; i < snake.size(); i++) {
         painter.drawRect(sizeBorder + snake[i].x() * sizeBlock,
             sizeBorder + snake[i].y() * sizeBlock,
@@ -56,17 +56,17 @@ void Snake::paintEvent(QPaintEvent* e) {
     }
 
     // fruits
-    painter.setBrush(Qt::red);
+    painter.setBrush(color.red);
     painter.drawEllipse(sizeBorder + pointFruits.x() * sizeBlock, 
         sizeBorder + pointFruits.y() * sizeBlock, 
         sizeBlock, 
         sizeBlock);
 
     // status area
-    painter.setPen(Qt::black);
+    painter.setPen(color.black);
     painter.setFont(QFont("Courier", 15));
-    painter.drawText(sizeBorder * 2 + widthGameArea + 20,
-        sizeBorder * 2 + heightGameArea + 20,
+    painter.drawText(widthGameArea + (widthMainWindow - widthGameArea),
+        heightGameArea / 3,
         "Score" + QString::number(gameScore));
 }
 
@@ -133,6 +133,7 @@ void Snake::growSnake() {
     }
 
     if (snake.contains(pointFruits)) {
+        gameTimer->start(gameTime -= 10);
         gameScore++;
         spawnFruits();
     }
