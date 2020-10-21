@@ -30,10 +30,37 @@ void Snake::initGame() {
 }
 
 void Snake::spawnFruits() {
+    
     pointFruits.setX(rand() % countRow);
     pointFruits.setY(rand() % countRow);
     if (snake.contains(pointFruits)) {
         spawnFruits();
+    }
+}
+
+QColor Snake::setRandomColor() {
+    int randColor = rand() % 7;
+    switch (randColor) {
+    case 0:
+        return color.red;
+        break;
+    case 1:
+        return color.yellow;
+        break;
+    case 2:
+        return color.green;
+        break;
+    case 3:
+        return color.yellow.darker(150);
+        break;
+    case 4:
+        return color.red.lighter(150);
+        break;
+    case 5:
+        return color.magenta;
+        break;
+    case 6: 
+        return color.magenta.darker(150);
     }
 }
 
@@ -56,12 +83,11 @@ void Snake::paintEvent(QPaintEvent* e) {
     }
 
     // fruits
-    painter.setBrush(color.red);
-    painter.drawEllipse(sizeBorder + pointFruits.x() * sizeBlock, 
-        sizeBorder + pointFruits.y() * sizeBlock, 
-        sizeBlock, 
-        sizeBlock);
-
+        painter.setBrush(randColor);
+        painter.drawEllipse(sizeBorder + pointFruits.x() * sizeBlock,
+            sizeBorder + pointFruits.y() * sizeBlock,
+            sizeBlock,
+            sizeBlock);
     // status area
     painter.setPen(color.black);
     painter.setFont(QFont("Courier", 15));
@@ -133,6 +159,7 @@ void Snake::growSnake() {
     }
 
     if (snake.contains(pointFruits)) {
+        randColor = setRandomColor();
         gameTimer->start(gameTime -= 10);
         gameScore++;
         spawnFruits();

@@ -28,7 +28,7 @@ public:
 	static const int sizeBlock = 35;
 	static const int sizeBorder = 10; // границы
 	static const int countRow = 20; // столбцы
-	int gameTime = 500;
+	int gameTime = 200;
 
 	enum Direction {
 		UP,
@@ -43,8 +43,10 @@ public:
 		QColor red = Qt::red;
 		QColor yellow = Qt::yellow;
 		QColor blue = Qt::blue;
+		QColor magenta = Qt::magenta;
 	}color;
 
+	QColor randColor;
 	virtual void paintEvent(QPaintEvent* e);
 	virtual void keyPressEvent(QKeyEvent* e);
 
@@ -54,6 +56,7 @@ public:
 	void pauseGame();
 	bool gameOver();
 	void spawnFruits();
+	QColor setRandomColor();
 
 private slots:
 	void growSnake();
