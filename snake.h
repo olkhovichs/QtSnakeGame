@@ -7,6 +7,8 @@
 #include <QPainter>
 #include <QFont>
 #include <QMessageBox>
+#include <QPushButton>
+#include <QApplication>
 
 #include <ctime>
 
@@ -45,18 +47,18 @@ public:
 		QColor blue = Qt::blue;
 		QColor magenta = Qt::magenta;
 	}color;
-
 	QColor randColor;
+
 	virtual void paintEvent(QPaintEvent* e);
 	virtual void keyPressEvent(QKeyEvent* e);
 
 	void setMainWindow();
-	void setPreviewWindow();
 	void initGame();
 	void pauseGame();
 	bool gameOver();
 	void spawnFruits();
 	QColor setRandomColor();
+	void setPreviewWindow();
 
 private slots:
 	void growSnake();
@@ -68,4 +70,6 @@ public:
 	QPoint pointFruits;
 	QList<QPoint> snake;
 	Direction direction;
+
+	QPushButton* quit;
 };

@@ -4,6 +4,7 @@ Snake::Snake(QWidget* parent)
     : QMainWindow(parent) {
 
     setMainWindow();
+    setPreviewWindow();
     initGame();
 }
 
@@ -13,6 +14,14 @@ void Snake::setMainWindow() {
     this->resize(widthMainWindow, heightMainWindow);
     this->setWindowTitle("Snake");
     this->setWindowIcon(QIcon("C:\\VisualStudio\\Qt\\Snake\\img\\titleIcon.png"));
+}
+
+void Snake::setPreviewWindow() {
+    quit = new QPushButton("Quit", this);
+    quit->setStyleSheet("QPushButton{ background-color: rgb(143,122,102); border-radius: 10px; font: bold; color: white; }");
+    quit->setFont(QFont("Sans", 15));
+    quit->setGeometry(800, 100, 100, 100);
+    connect(quit, SIGNAL(clicked), qApp, SLOT(pauseGame()));
 }
 
 void Snake::initGame() {
@@ -30,7 +39,6 @@ void Snake::initGame() {
 }
 
 void Snake::spawnFruits() {
-    
     pointFruits.setX(rand() % countRow);
     pointFruits.setY(rand() % countRow);
     if (snake.contains(pointFruits)) {
