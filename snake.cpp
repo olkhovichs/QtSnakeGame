@@ -4,7 +4,6 @@ Snake::Snake(QWidget* parent)
     : QMainWindow(parent) {
 
     setMainWindow();
-    setPreviewWindow();
     initGame();
 }
 
@@ -14,15 +13,6 @@ void Snake::setMainWindow() {
     this->resize(widthMainWindow, heightMainWindow);
     this->setWindowTitle("Snake");
     this->setWindowIcon(QIcon("C:\\VisualStudio\\Qt\\Snake\\img\\titleIcon.png"));
-}
-
-void Snake::setPreviewWindow() {
-    quit = new QPushButton("Quit", this);
-    quit->setStyleSheet("QPushButton{ background-color: rgb(143,122,102); border-radius: 10px; font: bold; color: white; }");
-    quit->setFont(QFont("Sans", 15));
-    quit->setGeometry(800, 100, 100, 100);
-    connect(quit, SIGNAL(clicked()), this, SLOT(pauseGame()));
-    
 }
 
 void Snake::initGame() {
@@ -85,7 +75,7 @@ void Snake::paintEvent(QPaintEvent* e) {
     painter.setBrush(color.green.darker(150));
     painter.setPen(color.black);
     for (int i = 0; i < snake.size(); i++) {
-        painter.drawRect(sizeBorder + snake[i].x() * sizeBlock,
+        painter.drawEllipse(sizeBorder + snake[i].x() * sizeBlock,
             sizeBorder + snake[i].y() * sizeBlock,
             sizeBlock,
             sizeBlock);
@@ -99,13 +89,27 @@ void Snake::paintEvent(QPaintEvent* e) {
             sizeBlock);
     // status area
     painter.setPen(color.black);
-    painter.setFont(QFont("Courier", 15));
-    painter.drawText(widthGameArea + (widthMainWindow - widthGameArea),
-        heightGameArea / 3,
-        "Score" + QString::number(gameScore));
+    painter.setFont(QFont("Consolas", 18));
+    painter.drawText(widthMainWindow - 2 * sizeBorder - 250,
+        100, 
+        "Score: " + QString::number(gameScore));
+
+    //pause info
+    painter.setPen(color.black);
+    painter.setFont(QFont("Consolas", 14));
+    painter.drawText(widthMainWindow - 2 * sizeBorder - 250,
+        heightMainWindow - 100,
+        "TAB: pause");
+
+    // exit info
+    painter.setPen(color.black);
+    painter.setFont(QFont("Consolas", 14));
+    painter.drawText(widthMainWindow - 2 * sizeBorder - 240,
+        heightMainWindow - 50,
+        "Esc: exit");
 }
 
-void Snake::keyPressEvent(QKeyEvent* e) { // unfinished
+void Snake::keyPressEvent(QKeyEvent* e) { 
     switch (e->key()) {
     case Qt::Key_Up:
         if (direction != DOWN) {
@@ -129,6 +133,9 @@ void Snake::keyPressEvent(QKeyEvent* e) { // unfinished
         break;
     case Qt::Key_Tab:
         pauseGame();
+        break;
+    case Qt::Key_Escape:
+        QMainWindow::close();
         break;
     default:
         break;

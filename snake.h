@@ -40,14 +40,14 @@ public:
 	};
 
 	struct Colors {
+		QColor red = Qt::red;
 		QColor black = Qt::black;
 		QColor green = Qt::green;
-		QColor red = Qt::red;
 		QColor yellow = Qt::yellow;
 		QColor blue = Qt::blue;
 		QColor magenta = Qt::magenta;
 	}color;
-	QColor randColor;
+	QColor randColor = Qt::red;
 
 	virtual void paintEvent(QPaintEvent* e);
 	virtual void keyPressEvent(QKeyEvent* e);
@@ -56,12 +56,11 @@ public:
 	void initGame();
 	bool gameOver();
 	void spawnFruits();
+	void pauseGame();
 	QColor setRandomColor();
-	void setPreviewWindow();
 
 public slots:
 	void growSnake();
-	void pauseGame();
 
 public:
 	QTimer* gameTimer;
@@ -70,6 +69,5 @@ public:
 	QPoint pointFruits;
 	QList<QPoint> snake;
 	Direction direction;
-
-	QPushButton* quit;
+	
 };
