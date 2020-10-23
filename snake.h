@@ -54,14 +54,14 @@ public:
 
 	void setMainWindow();
 	void initGame();
-	void pauseGame();
 	bool gameOver();
 	void spawnFruits();
 	QColor setRandomColor();
 	void setPreviewWindow();
 
-private slots:
+public slots:
 	void growSnake();
+	void pauseGame();
 
 public:
 	QTimer* gameTimer;

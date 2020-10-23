@@ -21,7 +21,8 @@ void Snake::setPreviewWindow() {
     quit->setStyleSheet("QPushButton{ background-color: rgb(143,122,102); border-radius: 10px; font: bold; color: white; }");
     quit->setFont(QFont("Sans", 15));
     quit->setGeometry(800, 100, 100, 100);
-    connect(quit, SIGNAL(clicked), qApp, SLOT(pauseGame()));
+    connect(quit, SIGNAL(clicked()), this, SLOT(pauseGame()));
+    
 }
 
 void Snake::initGame() {
