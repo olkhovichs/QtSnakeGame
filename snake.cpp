@@ -107,6 +107,22 @@ void Snake::paintEvent(QPaintEvent* e) {
     painter.drawText(widthMainWindow - 2 * sizeBorder - 240,
         heightMainWindow - 50,
         "Esc: exit");
+
+    if (gameOver()) {
+        painter.eraseRect(0, 0, widthMainWindow, heightMainWindow);
+
+        painter.setPen(color.black);
+        painter.setFont(QFont("Consolas", 14));
+        painter.drawText(widthMainWindow / 2 - 100,
+            100,
+            "Game Over!");
+
+        painter.setPen(color.black);
+        painter.setFont(QFont("Consolas", 14));
+        painter.drawText(widthMainWindow - 2 * sizeBorder - 240,
+            heightMainWindow - 50,
+            "Esc: exit");
+    }
 }
 
 void Snake::keyPressEvent(QKeyEvent* e) { 
@@ -136,7 +152,6 @@ void Snake::keyPressEvent(QKeyEvent* e) {
         break;
     case Qt::Key_Escape:
         QMainWindow::close();
-        break;
     default:
         break;
     }
@@ -186,7 +201,7 @@ void Snake::growSnake() {
     if (gameOver()) {
         gameTimer->stop();
         QMessageBox::information(this, "Failed!", "Game over!");
-        return; // 
+        return; 
     }
     update();
 }

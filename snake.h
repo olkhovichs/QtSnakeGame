@@ -23,6 +23,7 @@ public:
 	explicit Snake(QWidget* parent = Q_NULLPTR);
 	~Snake();
 
+private:
 	static const int widthMainWindow = 1080;
 	static const int heightMainWindow = 720;
 	static const int widthGameArea = 700;
@@ -59,15 +60,15 @@ public:
 	void pauseGame();
 	QColor setRandomColor();
 
-public slots:
+private slots:
 	void growSnake();
 
-public:
+private:
 	QTimer* gameTimer;
 	bool isPause;
 	int gameScore = 0;
 	QPoint pointFruits;
-	QList<QPoint> snake;
+	QVector<QPoint> snake;
 	Direction direction;
-	
+	QPainter painter;
 };
